@@ -1,0 +1,1 @@
+alter table QUESTION drop column COLUMN_11;
