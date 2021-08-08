@@ -3,6 +3,7 @@ package com.yoona.community.dto;
 import com.yoona.community.model.User;
 
 public class QuestionDTO {
+    private int id;
     private String title;
     private String description;
     private String tag;
@@ -13,6 +14,14 @@ public class QuestionDTO {
     private Integer commentCount;
     private Integer likeCount;
     private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;

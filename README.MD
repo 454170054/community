@@ -12,6 +12,9 @@
 [Visual Paradigm](https://www.visual-paradigm.com)
 
 
+## 其它
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+
 
 
 
