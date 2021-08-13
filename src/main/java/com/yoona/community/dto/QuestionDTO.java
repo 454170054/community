@@ -3,25 +3,19 @@ package com.yoona.community.dto;
 import com.yoona.community.model.User;
 
 public class QuestionDTO {
-    private int id;
+    private Long id;
     private String title;
     private String description;
     private String tag;
     private Long gmtCreate;
     private Long gmtModified;
-    private Integer creator;
+    private Long creator;
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
     private User user;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public User getUser() {
         return user;
@@ -41,6 +35,22 @@ public class QuestionDTO {
 
     public String getDescription() {
         return description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Long creator) {
+        this.creator = creator;
     }
 
     public void setDescription(String description) {
@@ -69,14 +79,6 @@ public class QuestionDTO {
 
     public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
-    }
-
-    public Integer getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Integer creator) {
-        this.creator = creator;
     }
 
     public Integer getViewCount() {

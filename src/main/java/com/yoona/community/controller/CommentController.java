@@ -1,24 +1,47 @@
 package com.yoona.community.controller;
 
-import com.yoona.community.dto.CommentDTO;
-import com.yoona.community.mapper.COMMENTMapper;
-import com.yoona.community.model.COMMENT;
+import com.yoona.community.Exception.CustomizeErrorCode;
+import com.yoona.community.dto.CommentCreateDTO;
+import com.yoona.community.dto.ResultDTO;
+import com.yoona.community.model.Comment;
+import com.yoona.community.model.User;
+import com.yoona.community.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
 public class CommentController {
 
     @Autowired
-    private COMMENTMapper commentMapper;
+    private CommentService commentService;
 
+    @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public Object post(@RequestBody CommentDTO commentDTO){
-        COMMENT record = new COMMENT();
-        commentMapper.insert(record);
+    public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
+                       HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return ResultDTO.errorOf(CustomizeErrorCode.NOT_LOGIN);
+        }
+        if(commentCreateDTO == null || commentCreateDTO.getContent() == null || commentCreateDTO.getContent().equals("")){
+            return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
+        }
+        Comment comment = new Comment();
+        comment.setParentId(commentCreateDTO.getParentId());
+        comment.setContent(commentCreateDTO.getContent());
+        comment.setType(commentCreateDTO.getType());
+        comment.setGmtModified(System.currentTimeMillis());
+        comment.setGmtCreate(System.currentTimeMillis());
+        comment.setCommentator(user.getId());
+        comment.setLikeCount(0L);
+        commentService.insert(comment);
+        return ResultDTO.okOf();
     }
 }
