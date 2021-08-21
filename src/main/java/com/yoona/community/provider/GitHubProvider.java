@@ -1,5 +1,7 @@
 package com.yoona.community.provider;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.yoona.community.dto.AccessTokenDTO;
 import com.yoona.community.dto.GithubUser;
@@ -8,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-
 @Component
 public class GitHubProvider {
+    private static final Logger logger = LoggerFactory.getLogger("com.yoona.community");
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
@@ -24,7 +26,7 @@ public class GitHubProvider {
             String token = string.split("&")[0].split("=")[1];
             return token;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return null;
     }
@@ -40,6 +42,7 @@ public class GitHubProvider {
             String string = response.body().string();
             return JSON.parseObject(string, GithubUser.class);
         } catch (IOException e) {
+            logger.error(e.getMessage(), e);
         }
     return null;
     }

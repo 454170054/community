@@ -3,6 +3,7 @@ package com.yoona.community.interceptor;
 import com.yoona.community.mapper.UserMapper;
 import com.yoona.community.model.User;
 import com.yoona.community.model.UserExample;
+import com.yoona.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,8 +19,11 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    NotificationService notificationService;
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null){
             for (Cookie cookie : cookies) {
@@ -30,6 +34,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                       List<User> users = userMapper.selectByExample(userExample);
                       if(users.size() != 0){
                           request.getSession().setAttribute("user", users.get(0));
+                          Long unreadCount = notificationService.unreadCount(users.get(0).getId());
+                          request.getSession().setAttribute("unreadCount", unreadCount);
                       }
                     break;
                 }
@@ -39,12 +45,12 @@ public class SessionInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
     }
 }

@@ -3,13 +3,11 @@ package com.yoona.community.controller;
 
 import com.yoona.community.dto.AccessTokenDTO;
 import com.yoona.community.dto.GithubUser;
-import com.yoona.community.mapper.UserMapper;
 import com.yoona.community.model.User;
 import com.yoona.community.provider.GitHubProvider;
 import com.yoona.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

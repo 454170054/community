@@ -22,7 +22,7 @@ public class CustomizeExceptionHandler {
     Logger logger = LoggerFactory.getLogger("com.yoona.community");
     @ExceptionHandler(Exception.class)
     ModelAndView handle(Throwable ex, Model model, HttpServletRequest request, HttpServletResponse response) {
-        logger.error(ex.getMessage());
+        logger.error(ex.getMessage(), ex);
         String contentType = request.getContentType();
         if ("application/json".equals(contentType)) {
             ResultDTO resultDTO;

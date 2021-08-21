@@ -1,18 +1,54 @@
 .body{
-    background-color: #efefef;
+    background-color: #eee;
 }
 .main{
-    background-color: white;
-    margin-top: 30px;
+    background-color: #eee;
+    margin-top: 60px;
     margin-left: 60px;
     margin-right: 60px;
+}
+.main .background{
+    background: white;
 }
 .quest-title{
     margin-top: 25px;
 }
+.quest-tag{
+    margin-right: 8px;
+}
+.quest-tag .glyphicon{
+    top: 3px;
+}
+.quest-related{
+    padding-left: 14px;
+    font-size: 16px;
+}
+.quest-pig{
+    width: 350px;
+}
+.publish-tag-tab{
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.publish-tag-tab .label-info{
+    margin: 5px 5px;
+    font-size: 15px;
+    white-space: normal;
+    display: inline-block;
+}
+.publish-tag-tab .tab-pane{
+    padding-top: 10px;
+}
+.publish-tag-tab .glyphicon-tags{
+    right: 5px;
+}
 .btn-publish{
     float: right;
     margin-bottom: 15px;
+}
+.alert{
+    margin-left: 15px;
 }
 .media-object{
     width: 38px;
@@ -29,7 +65,9 @@
 .profile .section {
     margin-top: 15px;
 }
-
+.profile-replies{
+    font-size: 17px;
+}
 .community-menu{
     display: block;
     color: #999999;
@@ -48,6 +86,16 @@
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
+.sub-comments{
+    margin-top: 15px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+}
+.sub-comments .btn{
+    margin: 10px 0;
+}
 .comment-sp{
     margin-top: 0;
 }
@@ -59,6 +107,16 @@
     margin-right: 6px;
     font-size: 15px;
     cursor: pointer;
+}
+.menu .comment-icon{
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu .comment-icon :hover{
+    color: #499ef3;
+}
+.menu .active{
+    color: #499ef3;
 }
 .menu .icon:hover{
     color: #499ef3;

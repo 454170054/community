@@ -1,7 +1,11 @@
 package com.yoona.community.controller;
 
+import com.yoona.community.dto.NotificationDTO;
 import com.yoona.community.dto.PaginationDTO;
+import com.yoona.community.dto.QuestionDTO;
+import com.yoona.community.mapper.NotificationMapper;
 import com.yoona.community.model.User;
+import com.yoona.community.service.NotificationService;
 import com.yoona.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,9 @@ public class ProfileController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,
                           Model model,
@@ -30,12 +37,14 @@ public class ProfileController {
         if ("questions".equals(action)) {
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
+            PaginationDTO<QuestionDTO> pagination = questionService.list(user.getId(), page, size);
+            model.addAttribute("pagination", pagination);
         } else if ("replies".equals(action)) {
+            PaginationDTO<NotificationDTO> paginationDTO = notificationService.list(user.getId(), page, size);
             model.addAttribute("section", "replies");
             model.addAttribute("sectionName", "最新回复");
+            model.addAttribute("pagination", paginationDTO);
         }
-        PaginationDTO pagination = questionService.list(user.getId(), page, size);
-        model.addAttribute("pagination", pagination);
         return "profile";
     }
 }
