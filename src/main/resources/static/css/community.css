@@ -121,3 +121,9 @@
 .menu .icon:hover{
     color: #499ef3;
 }
+.footer{
+    padding: 20px 30%;
+}
+.error{
+    background-color: white;
+}

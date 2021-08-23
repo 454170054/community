@@ -1,1 +1,1 @@
-alter table QUESTION drop column COLUMN_11;
+alter table question drop column column_11;

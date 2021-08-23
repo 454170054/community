@@ -27,14 +27,15 @@ public class FileService {
         String dir = "E:/springboot/community/src/main/resources/static/images/upload/";
         String fileName = UUID.randomUUID().toString() + '.' + fileSeg[fileSeg.length - 1];
         File newFile = new File(dir + fileName);
+        FileDTO fileDTO = new FileDTO();
         try {
             file.transferTo(newFile);
+            fileDTO.setMessage("上传成功");
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
+            fileDTO.setMessage("上传失败");
         }
-        FileDTO fileDTO = new FileDTO();
         fileDTO.setSuccess(1);
-        fileDTO.setMessage("上传成功");
         fileDTO.setUrl("/images/upload/" + fileName);
         return fileDTO;
     }

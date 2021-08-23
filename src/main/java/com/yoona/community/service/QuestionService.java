@@ -49,7 +49,7 @@ public class QuestionService {
         if (page > paginationDTO.getTotalPage()) {
             page = paginationDTO.getTotalPage();
         }
-        Integer offset = size * (page - 1);
+        Integer offset = page < 1? 0 : size * (page - 1);
         queryDTO.setPage(offset);
         queryDTO.setSize(size);
         List<Question> questionList = questionExtMapper.selectBySearch(queryDTO);

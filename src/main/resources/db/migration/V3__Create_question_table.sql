@@ -11,6 +11,6 @@ create table question
 	like_count int default 0,
 	tag varchar(256),
 	column_11 int,
-	constraint QUESTION_PK
+	constraint question_pk
 		primary key (id)
 );
