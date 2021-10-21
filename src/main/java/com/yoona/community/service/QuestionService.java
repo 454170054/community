@@ -37,6 +37,8 @@ public class QuestionService {
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
             search = String.join("|", tags);
+        }else{
+            search = null;
         }
         PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
         QueryDTO queryDTO = new QueryDTO();

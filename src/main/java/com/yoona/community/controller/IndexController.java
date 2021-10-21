@@ -29,4 +29,5 @@ public class IndexController {
         model.addAttribute("search", search);
         return "index";
     }
+
 }
