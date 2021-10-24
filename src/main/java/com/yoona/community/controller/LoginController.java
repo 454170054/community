@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
-public class AuthorizeController {
+public class LoginController {
 
     @Autowired
     private GitHubProvider gitHubProvider;
